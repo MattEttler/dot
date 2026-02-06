@@ -19,6 +19,13 @@ augroup END
 
 nnoremap <C-p> :Gfind 
 nnoremap <leader>ps :call <SID>DoGrep()<CR>
+nnoremap <leader>ba <Cmd>silent! %bd \| silent! e# \| silent! bd#<CR>
+nnoremap ' :<C-u>call GoToMarkedFile("'" . nr2char(getchar()))<CR>
+
+function! GoToMarkedFile(mark)
+    let marked_buffer = getpos(a:mark)[0]
+    execute "buffer " . marked_buffer
+endfunction
 
 " Fuzzy search Git-tracked file contents with a clean Quickfix view
 function! s:DoGrep()
